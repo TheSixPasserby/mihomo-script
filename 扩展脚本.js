@@ -1,3 +1,165 @@
+// 常量定义
+const test_interval = 300;
+const test_tolerance = 50;
+const groupBaseOption = {
+  "interval": 300,
+  "timeout": 3000,
+  "url": "https://www.google.com/generate_204",
+  "lazy": true,
+  "max-failed-times": 3,
+  "hidden": false
+};
+const regionConfig = [
+  {
+      name: "🇺🇸 美国 📶",
+      matcher: "美国|🇺🇸|US|United States|America",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/us.svg"
+  },
+  {
+      name: "🇯🇵 日本 📶",
+      matcher: "日本|🇯🇵|JP|Japan",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg"
+  },
+  {
+      name: "🇰🇷 韩国 📶",
+      matcher: "韩|🇰🇷|kr|korea",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/kr.svg"
+  },
+  {
+      name: "🇸🇬 新加坡 📶",
+      matcher: "新加坡|🇸🇬|SG|狮城|Singapore",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg"
+  },
+  {
+      name: "🇭🇰 香港 📶",
+      matcher: "香港|🇭🇰|HK|Hong Kong|HongKong",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg"
+  },
+  {
+      name: "🇹🇼 台湾 📶",
+      matcher: "台湾|🇹🇼|tw|taiwan|tai wan",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/tw.svg"
+  },
+  {
+      name: "🇬🇧 英国 📶",
+      matcher: "英|🇬🇧|uk|united kingdom|great britain",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/gb.svg"
+  },
+  {
+      name: "🇫🇷 法国 📶",
+      matcher: "法国|🇫🇷|FR|France",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/fr.svg"
+  },
+  {
+      name: "🇩🇪 德国 📶",
+      matcher: "德国|🇩🇪|DE|germany",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/de.svg"
+  },
+  {
+      name: "🇵🇱 波兰 📶",
+      matcher: "波兰|🇵🇱|Poland|PL|Poland",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/pl.svg"
+  },
+  {
+      name: "🇳🇱 荷兰 📶",
+      matcher: "荷兰|🇳🇱|NL|Netherlands",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/nl.svg"
+  },
+  {
+      name: "🇮🇪 爱尔兰 📶",
+      matcher: "爱尔兰|🇮🇪|IE|Ireland",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ie.svg"
+  },
+  {
+      name: "🇸🇪 瑞典 📶",
+      matcher: "瑞典|🇸🇪|SE|Sweden",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/se.svg"
+  },
+  {
+      name: "🇷🇺 俄罗斯 📶",
+      matcher: "俄罗斯|🇷🇺|RU|Russia",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ru.svg"
+  },
+  {
+      name: "🇮🇹 意大利 📶",
+      matcher: "意大利|🇮🇹|IT|Italy",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/it.svg"
+  },
+  {
+      name: "🇪🇸 西班牙 📶",
+      matcher: "西班牙|🇪🇸|ES|Spain",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/es.svg"
+  },
+  {
+      name: "🇵🇹 葡萄牙 📶",
+      matcher: "葡萄牙|🇵🇹|PT|Portugal",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/pt.svg"
+  },
+  {
+      name: "🇹🇷 土耳其 📶",
+      matcher: "土耳其|🇹🇷|TR|Turkey",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/tr.svg"
+  },
+  {
+      name: "🇦🇷 阿根廷 📶",
+      matcher: "阿根廷|🇦🇷|AR|Argentina",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ar.svg"
+  },
+  {
+      name: "🇨🇦 加拿大 📶",
+      matcher: "加拿大|🇨🇦|CA|Canada",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ca.svg"
+  },
+  {
+      name: "🇦🇺 澳大利亚 📶",
+      matcher: "澳大利亚|🇦🇺|AU|Australia",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/au.svg"
+  },
+  {
+      name: "🇮🇷 伊朗 📶",
+      matcher: "伊朗|🇮🇷|IR|Iran",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ir.svg"
+  },
+  {
+      name: "🇮🇩 印度尼西 📶",
+      matcher: "印度尼西亚|印尼|🇮🇩|ID|Indonesia",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/id.svg"
+  },
+  {
+      name: "🇲🇾 马来西亚 📶",
+      matcher: "马来|🇲🇾|MY|Malaysia",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/my.svg"
+  },
+  {
+      name: "🇵🇭 菲律宾 📶",
+      matcher: "菲律宾|🇵🇭|PH|Philippines",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/ph.svg"
+  },
+  {
+      name: "🇮🇳 印度 📶",
+      matcher: "印度|🇮🇳|IN|India",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/in.svg"
+  },
+  {
+      name: "🇻🇳 越南 📶",
+      matcher: "越南|🇻🇳|VN|Vietnam",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/vn.svg"
+  },
+  {
+      name: "🇹🇭 泰国 📶",
+      matcher: "泰国|🇹🇭|TH|Thailand",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/th.svg"
+  },
+  {
+      name: "🇨🇳 中国 📶",
+      matcher: "中国|🇨🇳|CN|cn|china",
+      icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/cn.svg"
+  },
+  {
+      name: "🌐 其他 📶",
+      icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Global.png"
+  }
+];
 // 国内DNS服务器
 const domesticNameservers = [
   "https://223.5.5.5/dns-query", // 阿里DoH
@@ -141,6 +303,24 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/rule/Bahamut.txt",
     "path": "./ruleset/xiaolin-007/bahamut.yaml"
   },
+  "SteamCN": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml",
+    "path": "./ruleset/blackmatrix7/SteamCN.yaml"
+  },
+  "Steam": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml",
+    "path": "./ruleset/blackmatrix7/Steam.yaml"
+  },
+  "DMMGames": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/DMM/DMM.yaml",
+    "path": "./ruleset/blackmatrix7/DMM.yaml"
+  },
   "YouTube": {
     ...ruleProviderCommon,
     "behavior": "classical",
@@ -189,6 +369,9 @@ const rules = [
   "RULE-SET,YouTube,YouTube",
   "RULE-SET,Netflix,Netflix",
   "RULE-SET,bahamut,动画疯",
+    "RULE-SET,SteamCN,Steam下载",
+  "RULE-SET,Steam,Steam商店",
+  "RULE-SET,DMMGames,DMM Games",
   "RULE-SET,Spotify,Spotify",
   "RULE-SET,BilibiliHMT,哔哩哔哩港澳台",
   "RULE-SET,AI,AI",
@@ -206,15 +389,101 @@ const rules = [
   "GEOIP,CN,全局直连,no-resolve",
   "MATCH,漏网之鱼"
 ];
-// 代理组通用配置
-const groupBaseOption = {
-  "interval": 300,
-  "timeout": 3000,
-  "url": "https://www.google.com/generate_204",
-  "lazy": true,
-  "max-failed-times": 3,
-  "hidden": false
-};
+
+// 添加地区分组
+function addRegions(config) {
+  let regions = [];
+  if (!config.proxies) {
+      if (!config["proxy-providers"]) return;
+      const providers = Object.keys(config["proxy-providers"]);
+      if (providers.length === 0) return;
+      let exclude = "";
+      for (const region of regionConfig) {
+          if (!region.name) continue;
+          if (region.matcher) {
+              exclude += (exclude === "" ? region.matcher : `|${region.matcher}`)
+              config["proxy-groups"].push({
+                  ...groupBaseOption,
+                  name: region.name,
+                  type: "url-test",
+                  interval: test_interval,
+                  tolerance: test_tolerance,
+                  use: providers,
+                  filter: region.matcher,
+                  icon: region.icon,
+              });
+          } else {
+              config["proxy-groups"].push({
+                  ...groupBaseOption,
+                  name: region.name,
+                  type: "url-test",
+                  use: providers,
+                  interval: test_interval,
+                  tolerance: test_tolerance,
+                  "exclude-filter": exclude,
+                  icon: region.icon,
+              });
+          }
+          regions.push(region.name)
+      }
+  } else {
+      let names = config.proxies.map(p => p.name).filter(Boolean);
+      if (names.length === 0) return;
+      for (const region of regionConfig) {
+          let proxies = [], noproxies = [];
+          if (!region.matcher) {
+              proxies = [...names];
+              noproxies = [];
+          } else {
+              const matches = region.matcher.split("|");
+              if (matches.length === 0) continue;
+              const result = names.reduce((acc, name) => {
+                  (matches.some(m => name.includes(m)) ? acc.proxies : acc.noproxies).push(name);
+                  return acc;
+              }, { proxies: [], noproxies: [] });
+              proxies = result.proxies;
+              noproxies = result.noproxies;
+          }
+          if (proxies.length === 0) continue;
+          config["proxy-groups"].push({
+              ...groupBaseOption,
+              name: region.name,
+              type: "url-test",
+              interval: test_interval,
+              tolerance: test_tolerance,
+              proxies: proxies,
+              icon: region.icon,
+          });
+          regions.push(region.name);
+          if (noproxies.length === 0) break;
+          names = noproxies;
+      }
+  }
+  if (regions.length === 0) return;
+  const entries = config["proxy-groups"];
+  for (const entry of entries) {
+      if (!entry || !entry.proxies) continue;
+      if (entry.name === "节点选择") {
+          if (entry.proxies.length > 1) {
+              entry.proxies.splice(2, 0, "地区选择");
+          }
+      } else if (entry.name === "全局直连") {
+          entry.proxies.push("地区选择");
+      } else if (entry.type === "select" && !entry.hasOwnProperty("include-all")) {
+          entry.proxies.push(...regions)
+      }
+  }
+  if (entries.length > 0) {
+      entries.splice(1, 0, {
+          ...groupBaseOption,
+          name: "地区选择",
+          type: "select",
+          proxies: regions,
+          icon: "https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/World_Map.png",
+      })
+  }
+  config["proxy-groups"] = entries;
+}
 
 // 程序入口
 function main(config) {
@@ -234,17 +503,23 @@ function main(config) {
       ...groupBaseOption,
       "name": "节点选择",
       "type": "select",
-      "proxies": ["延迟选优", "故障转移"],
-      "include-all": true,
+      "proxies": ["手动选择", "延迟选优", "故障转移"],
       "filter": "^(?!.*(官网|套餐|流量|异常|剩余)).*$",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg"
+    },
+    {
+    ...groupBaseOption,
+        name: "手动选择",
+        type: "select",
+        "include-all": true,
+        icon: "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg",
     },
     {
       ...groupBaseOption,
       "name": "延迟选优",
       "type": "url-test",
-      "interval":120,
-      "tolerance": 200,
+      interval: test_interval,
+      tolerance: test_tolerance,
       "include-all": true,
       "filter": "^(?!.*(官网|套餐|流量|异常|剩余)).*$",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/speed.svg"
@@ -262,7 +537,6 @@ function main(config) {
       "name": "谷歌服务",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg"
     },
     {
@@ -270,7 +544,6 @@ function main(config) {
       "name": "YouTube",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg"
     },
     {
@@ -278,7 +551,6 @@ function main(config) {
       "name": "Netflix",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移", "全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/icon/netflix.svg"
     },
     {
@@ -286,14 +558,12 @@ function main(config) {
       "name": "电报消息",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移", "全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg"
     },
     {
       ...groupBaseOption,
       "name": "AI",
       "type": "select",
-      "include-all": true,
       "proxies": ["节点选择", "延迟选优", "故障转移"],
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg"
     },
@@ -302,7 +572,6 @@ function main(config) {
       "name": "微软服务",
       "type": "select",
       "proxies": ["全局直连", "节点选择", "延迟选优"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/microsoft.svg"
     },
     {
@@ -310,7 +579,6 @@ function main(config) {
       "name": "苹果服务",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg"
     },
     {
@@ -318,16 +586,35 @@ function main(config) {
       "name": "动画疯",
       "type": "select",
       "proxies": ["节点选择"],
-      "include-all": true,
       "filter": "(?i)台|tw|TW",
       "icon": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/icon/Bahamut.svg"
+    },
+	{
+      ...groupBaseOption,
+      "name": "Steam下载",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
+      "icon": "https://www.svgrepo.com/show/528953/download-square.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "Steam商店",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg"
+    },
+    {
+      ...groupBaseOption,
+      "name": "DMM Games",
+      "type": "select",
+      "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
+      "icon": "https://www.svgrepo.com/show/246314/gamepad.svg"
     },
     {
       ...groupBaseOption,
       "name": "哔哩哔哩港澳台",
       "type": "select",
       "proxies": ["全局直连", "节点选择","延迟选优", "故障转移"],
-      "include-all": true,
       "filter": "^(?!.*(官网|套餐|流量|异常|剩余)).*$",
       "icon": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/icon/bilibili.svg"
     },
@@ -336,7 +623,6 @@ function main(config) {
       "name": "Spotify",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/icon/spotify.svg"
     },
     {
@@ -351,7 +637,6 @@ function main(config) {
       "name": "全局直连",
       "type": "select",
       "proxies": ["DIRECT", "节点选择", "延迟选优", "故障转移"],
-      "include-all": true,
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg"
     },
     {
@@ -366,7 +651,6 @@ function main(config) {
       "name": "漏网之鱼",
       "type": "select",
       "proxies": ["节点选择", "延迟选优", "故障转移","全局直连"],
-      "include-all": true,
       "filter": "^(?!.*(官网|套餐|流量|异常|剩余)).*$",
       "icon": "https://fastly.jsdelivr.net/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/fish.svg"
     }
@@ -375,6 +659,8 @@ function main(config) {
   // 覆盖原配置中的规则
   config["rule-providers"] = ruleProviders;
   config["rules"] = rules;
+  // 地区分组
+  addRegions(config);
 // 添加判断
   if(config["proxies"]) {
     config["proxies"].forEach(proxy => {
@@ -387,6 +673,5 @@ function main(config) {
   return config;
 
 }
-
 
 
