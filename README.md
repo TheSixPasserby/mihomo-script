@@ -1,4 +1,6 @@
 # mihomo-script
 ## clash-verge Mihomo Party 防DNS泄露脚本 （通用）
 
-20250919 添加分支:添加Steam下载，商店，社区，DMM Games，添加地区选择
+20250919 添加分支：添加Steam下载，商店，社区，DMM Games，添加地区选择
+
+20250928 跟随原项目：添加TikTok分流规则

@@ -351,6 +351,13 @@ const ruleProviders = {
     "url": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/rule/AI.txt",
     "path": "./ruleset/xiaolin-007/AI.yaml"    
   },
+  "TikTok": {
+    ...ruleProviderCommon,
+    "behavior": "classical",
+    "url": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/rule/TikTok.txt",
+    "path": "./ruleset/xiaolin-007/TikTok.yaml"    
+    // 疑似原作者写错 "path": "./ruleset/xiaolin-007/AI.yaml"
+  },
 };
 // 规则
 const rules = [
@@ -375,6 +382,7 @@ const rules = [
   "RULE-SET,Spotify,Spotify",
   "RULE-SET,BilibiliHMT,哔哩哔哩港澳台",
   "RULE-SET,AI,AI",
+  "RULE-SET,TikTok,TikTok",
   "RULE-SET,google,谷歌服务",
   "RULE-SET,proxy,节点选择",
   "RULE-SET,gfw,节点选择",
@@ -569,6 +577,14 @@ function main(config) {
     },
     {
       ...groupBaseOption,
+      "name": "TikTok",
+      "type": "select",
+      "include-all": true,
+      "proxies": ["节点选择", "延迟选优", "故障转移"],
+      "icon": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/icon/tiktok.svg"
+    },
+    {
+      ...groupBaseOption,
       "name": "微软服务",
       "type": "select",
       "proxies": ["全局直连", "节点选择", "延迟选优"],
@@ -673,5 +689,3 @@ function main(config) {
   return config;
 
 }
-
-
