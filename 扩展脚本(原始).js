@@ -348,8 +348,8 @@ const ruleProviders = {
   "AI": {
     ...ruleProviderCommon,
     "behavior": "classical",
-    "url": "https://fastly.jsdelivr.net/gh/xiaolin-007/clash@main/rule/AI.txt",
-    "path": "./ruleset/xiaolin-007/AI.yaml"    
+    "url": "https://raw.githubusercontent.com/TheSixPasserby/mihomo-script/refs/heads/main/RULE/AI.txt",
+    "path": "./ruleset/HachiKei/AI.yaml"    
   },
   "TikTok": {
     ...ruleProviderCommon,
