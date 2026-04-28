@@ -1,3 +1,4 @@
+// UPDATE: 2026-04-28
 // 常量定义
 const test_interval = 300;
 const test_tolerance = 50;
